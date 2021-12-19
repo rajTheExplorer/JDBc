@@ -1,0 +1,34 @@
+import java.sql.*;
+public class JDBCCon {
+	public static void main(String[] args)
+	{
+		try
+		{
+			String url="jdbc:mysql://localhost:3306/movies?characterEncoding=utf8";
+			String uname="root";
+			String pass="Wrqgwjkp@967@#5";
+			String query="select * from top_movies";
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection(url,uname,pass);
+//			@'localhost' flush privileges;
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(query);
+			String name="";
+			while(rs.next())
+			{
+				name=rs.getString("movie_name")+" "+rs.getString("movie_maker");
+				System.out.println(name);
+			}
+			
+			System.out.println(name);
+			rs.next();
+			st.close();
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+}
